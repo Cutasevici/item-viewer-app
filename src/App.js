@@ -1,23 +1,116 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import SendOrderButton from './Assets/SendOrderButton';
+import ClearButton from './Assets/ClearButton';
+import updateOrder from './GlobalFunctionality/modifyOrder';
+import ItemSelector from './GlobalFunctionality/ItemSelector';
+import OrderList from './GlobalFunctionality/OrderList';
+import GetOrderHistory from './GlobalFunctionality/getOrderHistory';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 function App() {
+  const [order, setOrder] = useState([]);
+  const [editingOrderId, setEditingOrderId] = useState(null);
+  const [itemsToAdd, setItemsToAdd] = useState([]);
+  const [setFetchedOrders] = React.useState({});
+const [setSelectedOrderId] = React.useState(null);
+const [showNewOrder, setShowNewOrder] = useState(false);
+const [showOrderHistory, setShowOrderHistory] = useState(false);
+const [showExistingOrders, setShowExistingOrders] = useState(false);
+
+
+
+
+  
+  const clearEditingOrderId = () => {
+    setEditingOrderId(null);
+  };
+  
+
+  useEffect(() => {
+    console.log(order); // Logs the updated 'order' state whenever it changes
+  }, [order]);
+
+  const addToOrder = (item) => {
+    setOrder(prevOrder => [...prevOrder, item]);
+  };
+
+  const createOrder = () => {
+    console.log(order);
+  };
+
+  const clearOrder = () => {
+    setOrder([]);
+  };
+
+ 
+
+  const editOrder = (orderId) => {
+    updateOrder(orderId, itemsToAdd)
+      .then(() => {
+        console.log('Order updated successfully');
+        setItemsToAdd([]);
+      })
+      .catch(error => {
+        console.error('There was an error updating the order:', error);
+      });
+  };
+
+  const clearOrders = () => {
+    setFetchedOrders({}); // Reset fetchedOrders
+    setSelectedOrderId(null); // Reset selectedOrderId
+  };
+
+  function deleteItem(index) {
+    setOrder(prevOrder => prevOrder.filter((item, i) => i !== index));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="global-container">
+        <button className="global-button existing-orders-button" onClick={() => setShowExistingOrders(!showExistingOrders)}>
+          Existing Orders
+        </button>
+        {showExistingOrders && (
+          <>
+            <OrderList editOrder={editOrder}/>
+            <ClearButton clearOrders={clearOrders} />
+          </>
+        )}
+  
+        <button className="global-button order-history-button" onClick={() => setShowOrderHistory(!showOrderHistory)}>
+          Order History
+        </button>
+        {showOrderHistory && (
+          <GetOrderHistory />
+        )}
+  
+        <button className="global-button new-order-button" onClick={() => setShowNewOrder(!showNewOrder)}>
+          New Order
+        </button>
+        {showNewOrder && (
+          <div>
+            <ItemSelector addToOrder={addToOrder} />
+            <div className="secondary-components">
+              <SendOrderButton createOrder={createOrder} order={order} editingOrderId={editingOrderId} clearEditingOrderId={clearEditingOrderId} />
+              <ClearButton clearOrder={clearOrder} />
+            </div>
+            <div className="items-container">
+              {order.map((item, index) => (
+                <div key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ flex: 4 }}> {item.itemName}</div>  {/* item name */}
+                  <div style={{ flex: 4 }}> {item.itemPrice}</div> {/* item price */}
+                  <div style={{ flex: 1 }}>
+                    <button className ="secondary-components" onClick={() => deleteItem(index)}>Delete</button> {/* delete button */}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

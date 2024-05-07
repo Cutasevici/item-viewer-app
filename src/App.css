@@ -1,38 +1,371 @@
-.App {
+/* App.css */
+
+.global-button {
+  background-color: #AC3B61;
+  color: white;
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Add some padding */
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Add a shadow */
+  white-space: nowrap; /* Prevent the text from wrapping onto multiple lines */
+  overflow: hidden; /* Hide any text that overflows the button */
+  text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
+  width: 100%;
+  margin-bottom: 2px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.global-button:hover {
+  background-color: #007BFF; /* Darken the button when hovered */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.global-button:active {
+  background-color: #0056b3; /* Darken the button when clicked */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Make the shadow smaller when clicked */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.global-button.selected {
+  background-color: #4CAF50;
+  color: white;
+}
+/* app container */
+
+.app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 20px;
+}
+
+/* Buttons container */
+
+.global-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-components {
+  display: flex;
+  justify-content: space-around; /* Distribute buttons evenly */
+  align-items: center; 
+  background-color: #f2f2f2; 
+  padding: 10px; 
+  border-radius: 4px; /* Rounded corners */
+}
+
+.secondary-components * {
+  flex: 1; 
+  height: 50px; 
+  padding: 10px; 
+  font-size: 16px; 
+  margin: 0 5px; /* Add some space between buttons */
+  align-self: center;
+  transition: background-color 0.3s ease;
+  border-radius: 4px; /* Rounded corners */
+  border: none; /* Remove border */
+  background-color: #3F51B5; /* Android blue color */
+  color: white; /* White text */
+}
+
+.secondary-components *:focus {
+  outline: none; /* Remove outline */
+}
+
+.secondary-components *:active {
+  background-color: #303F9F; /* Darken background color when button is active */
+}
+
+.container {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  padding: 20px;
+}
+
+
+.items-container {
+  margin-top: 20px; /* Creates space above the items */
+  padding: 10px;
+  border: 1px solid #ccc; /* Adds a border around the items */
+  border-radius: 5px; /* Rounds the corners of the border */
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+}
+
+/* Common button class */
+.common-button {
+  width: 100%; /* Full width */
+  height: 50px; /* Or any other value */
+}
+
+/* Existing orders button */
+.existing-orders-button {
+  background-color: #AC3B61;
+  border: none;
+}
+
+.existing-orders-button:hover {
+  background-color: #66a3ff;
+}
+
+/* New order button */
+.new-order-button {
+  background-color: #669999; /* Green */
+  border: none;
+}
+
+.new-order-button:hover {
+  background-color: #006666;
+}
+
+/* Order History Button */
+.order-history-button {
+  background-color: #123C69; /* Bootstrap's warning color */
+  border: none;
+}
+
+.order-history-button:hover {
+  background-color: #EDC7B7; /* Darker shade for hover */
+}
+
+/* Item Selector */
+
+.item-selector {
+  border: 1px solid black;  /* Removes the border */
+  height: 40px; /* Matches the height of the button */
+  font-size: 16px; /* Matches the font size of the button */
+  background-color: white; /* Changes the background color to white */
+  color: black; /* Changes the text color to black */
+  
+  box-sizing: border-box; 
+}
+
+.item-selector:hover {
+  background-color: white; /* Matches the hover color of the button */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Add to order button */
+
+.add-to-order-button {
+  background-color: #4a85c9; /* Green background */
+  color: white; /* White text */
+}
+
+.add-to-order-button:hover {
+  background-color: #146150; /* Darker green on hover */
+}
+
+/* Send order button */
+
+.send-order-button {
+  background-color: #d0da4a; /* Green background */
+  color: white; /* White text */
+}
+
+.send-order-button:hover {
+  background-color: #ceab4a; /* Darker green on hover */
+}
+
+/* Dynamic button for Item */
+
+.container-dynamic-button {
+  display: grid;
+  grid-template-columns: repeat(6, auto); /* Creates a grid with 3 columns that are only as wide as their content */
+  grid-gap: 2px; /* Sets the gap between rows and columns */
+  justify-content: start; /* Aligns the grid items to the start of the grid line */
+  justify-content: center;
+}
+
+.item-button {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Add some padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  /* width: 90px; Remove the fixed width */
+  height: 50px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Add a shadow */
+  white-space: nowrap; /* Prevent the text from wrapping onto multiple lines */
+  overflow: hidden; /* Hide any text that overflows the button */
+  text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
+}
+
+.item-button:hover {
+  background-color: #007BFF; /* Darken the button when hovered */
+}
+
+.item-button:active {
+  background-color: #0056b3; /* Darken the button when clicked */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Make the shadow smaller when clicked */
+}
+
+.item-button.selected {
+  background-color: #4CAF50;
+  color: white;
+}
+/*Dynamic button for Get Order from OrderList.js */
+
+
+
+.get-order-button {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Add some padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Add a shadow */
+  white-space: nowrap; /* Prevent the text from wrapping onto multiple lines */
+  overflow: hidden; /* Hide any text that overflows the button */
+  text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.get-order-button:hover {
+  background-color: #007BFF; /* Darken the button when hovered */
+}
+
+.get-order-button:active {
+  background-color: #0056b3; /* Darken the button when clicked */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Make the shadow smaller when clicked */
+}
+
+.get-order-button.selected {
+  background-color: #4CAF50;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Diplay field for Items to add in OrderList.js */
+
+.order-container {
+  
+  width: 100vw; /* Make the container span the full width of the viewport */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.items-to-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.items-to-add h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.items-to-add p {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.order-items-list {
+  list-style-type: none; /* Remove the default bullet points */
+  padding: 0; /* Remove the default padding */
+}
+
+.order-item {
+  display: flex; /* Arrange the item name and price horizontally */
+  justify-content: space-between; /* Add space between the item name and price */
+  padding: 10px; /* Add some padding around each item */
+  border-bottom: 1px solid #ddd; /* Add a border below each item */
+}
+
+.item-name {
+  font-weight: bold; /* Make the item name bold */
+}
+
+.item-price {
+  color: #888; /* Make the item price a lighter color */
+}
+
+.order-details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile first styles */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .container-dynamic-button {
+    grid-template-columns: repeat(4, auto); /* Creates a grid with 4 columns that are only as wide as their content */
   }
-  to {
-    transform: rotate(360deg);
+
+  .item-button {
+    /* width: 60px; Remove the fixed width */
+    /* height: 40px; Remove the fixed height */
+    padding: 10px 20px; /* Add some padding */
+    white-space: nowrap; /* Prevent the text from wrapping onto multiple lines */
+    overflow: hidden; /* Hide any text that overflows the button */
+    text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
+  }
+}
+
+/* Tablet and above */
+@media (min-width: 768px) {
+  .global-container {
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: space-around; /* Distribute items evenly with space around them */
+  }
+}
+
+/* Desktop and above */
+@media (min-width: 1024px) {
+  .app-container {
+    max-width: 80% !important; /* Set max width to 80% of the screen width */
+    margin: 0 auto !important; /* Center the container */
+  }
+  .global-container {
+    width: 100%; /* Set width to 100% of .app-container */
+  }
+  .container-dynamic-button {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for desktop */
   }
 }
