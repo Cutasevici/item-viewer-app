@@ -5,12 +5,16 @@ const GetOrderHistory = () => {
   
 
   const getOrdersWithStatusNotPending = async () => {
-      const response = await fetch('http://localhost:8080/api/orders/view/status/pending');
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const orders = await response.json();
-      return orders;
+    const response = await fetch('http://localhost:8080/api/orders/view/status/pending');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.text();
+    if (!data) {
+      return [];
+    }
+    const orders = JSON.parse(data);
+    return orders;
   };
 
   useEffect(() => {
@@ -23,6 +27,9 @@ const GetOrderHistory = () => {
 
   return (
     <div>
+      {orders.length === 0 ? (
+      <p>No order history to display</p>
+    ) : (
       <table style={{ width: '100%' }}>
         <thead>
           <tr>
@@ -79,6 +86,7 @@ const GetOrderHistory = () => {
           ))}
         </tbody>
       </table>
+    )}
     </div>
   );
 };

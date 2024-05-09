@@ -101,7 +101,11 @@ const handleAddToOrderButtonClick = (item) => {
   setItemsToAdd(prevItems => [...prevItems, { itemId: item.itemId, itemName: item.itemName, itemPrice: item.itemPrice }]);
 };
 
-  
+const deleteItemToAdd = (index) => {
+  const newItemsToAdd = [...itemsToAdd];
+  newItemsToAdd.splice(index, 1);
+  setItemsToAdd(newItemsToAdd);
+};
   
 return (
   <div className="order-container">
@@ -140,10 +144,15 @@ return (
             <button className="secondary-components" onClick={() => addItemsToOrder(itemsToAdd)}>Update Order</button>
             {successMessage && <p>{successMessage}</p>}
             <ItemSelector addToOrder={handleAddToOrderButtonClick} />
-             <div className="items-to-add">
+            <div className="items-to-add">
               <h4>Items to Add:</h4>
-              {itemsToAdd.map(item => (
-                <p key={item.itemId}>{item.itemName} - ${item.itemPrice}</p>
+              {itemsToAdd.map((item, index) => (
+                <>
+                  <div key={item.itemId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <p style={{ flex: 4 }}>{item.itemName} - ${item.itemPrice}</p>
+                  </div>
+                  <button className="secondary-components" onClick={() => deleteItemToAdd(index)}>Delete</button>
+                </>
               ))}
             </div>
           </div>

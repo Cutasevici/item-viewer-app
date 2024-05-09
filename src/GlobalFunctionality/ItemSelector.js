@@ -6,6 +6,9 @@ import '../App.css';
 function ItemSelector(props) {
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  
+
+  
 
   useEffect(() => {
     async function fetchAndSetItems() {
@@ -29,19 +32,35 @@ function ItemSelector(props) {
   }
 
   
+
+
+  const groupItemsByType = (items) => {
+    return items.reduce((groupedItems, item) => {
+      (groupedItems[item.itemType] = groupedItems[item.itemType] || []).push(item);
+      return groupedItems;
+    }, {});
+  };
+  
+  const groupedItems = groupItemsByType([...items]);
+  
   return (
     <div className="container-dynamic-button">
-    {items.map(item => (
-      <button 
-        key={item.itemId} 
-        className={`item-button ${selectedItem && selectedItem.itemId === item.itemId ? 'selected' : ''}`} 
-        onClick={() => handleSelectChange(item.itemId)}
-      >
-        {item.itemName}
-      </button>
-    ))}
-  </div>
-);
+      {Object.entries(groupedItems).map(([type, items]) => (
+      <div key={type} className="group">
+      <div className="category-name">{type}</div> {/* Add a class here */}
+      {items.map(item => (
+        <button 
+          key={item.itemId}
+          className={`item-button ${selectedItem && selectedItem.itemId === item.itemId ? 'selected' : ''}`} 
+          onClick={() => handleSelectChange(item.itemId)}
+        >
+          {item.itemName}
+        </button>
+      ))}
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default ItemSelector;

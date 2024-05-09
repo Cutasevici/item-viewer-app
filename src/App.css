@@ -181,12 +181,39 @@ button:hover {
 
 /* Dynamic button for Item */
 
+.group {
+  margin: 1px 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  width: 100%; /* Adjust this value as needed */
+  
+  gap: 1px;
+  height: auto; /* Adjust this value as needed */
+  display: flex;
+  flex-direction: row; /* Change this to row */
+  flex-wrap: wrap; /* Add this to allow the buttons to wrap to the next line */
+  justify-content: center; /* Center items horizontally */
+  align-items: center;
+}
+
+.group .category-name {
+  font-size: 20px; /* Make the font larger */
+  font-weight: bold; /* Make the font bold */
+  text-align: center; /* Center the text */
+  width: 100%; /* Make the title take up the full width of the container */
+  margin-bottom: 1px; /* Add some space below the title */
+}
+
+
 .container-dynamic-button {
-  display: grid;
-  grid-template-columns: repeat(6, auto); /* Creates a grid with 3 columns that are only as wide as their content */
-  grid-gap: 2px; /* Sets the gap between rows and columns */
-  justify-content: start; /* Aligns the grid items to the start of the grid line */
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the start */
+  gap: 5px;
+  height: auto; /* Adjust this value as needed */
+  padding-top: 1px; /* Add some padding at the top */
 }
 
 .item-button {
@@ -194,19 +221,16 @@ button:hover {
   color: white;
   border: none;
   border-radius: 4px; /* Rounded corners */
-  padding: 10px 20px; /* Add some padding */
+  font-size: 20px; /* Increase the font size */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;
-  cursor: pointer;
+  
   transition-duration: 0.4s;
   /* width: 90px; Remove the fixed width */
   height: 50px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Add a shadow */
-  white-space: nowrap; /* Prevent the text from wrapping onto multiple lines */
-  overflow: hidden; /* Hide any text that overflows the button */
-  text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
+  margin: 2px;
 }
 
 .item-button:hover {
@@ -223,6 +247,7 @@ button:hover {
   color: white;
 }
 /*Dynamic button for Get Order from OrderList.js */
+
 
 
 
