@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ItemSelector from './ItemSelector';
 import CloseOrder from './closeOrder';
+import Modal from 'react-modal';
 
 
 function OrderList({editOrder}) {
@@ -9,6 +10,7 @@ function OrderList({editOrder}) {
     const [selectedOrderId, setSelectedOrderId] = useState(null);
     const [itemsToAdd, setItemsToAdd] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
   
     
   
@@ -93,7 +95,7 @@ const addItemsToOrder = async (items) => {
 
   const order = await response.json();
   setItemsToAdd([]); // reset itemsToAdd
-  setSuccessMessage('Order updated successfully!'); // set success message
+  setIsModalOpen(true); // open the modal
   return order;
 }
 
@@ -141,7 +143,7 @@ return (
                 ))}
               </tbody>
             </table>
-            <button className="secondary-components" onClick={() => addItemsToOrder(itemsToAdd)}>Update Order</button>
+            
             {successMessage && <p>{successMessage}</p>}
             <ItemSelector addToOrder={handleAddToOrderButtonClick} />
             <div className="items-to-add">
@@ -154,11 +156,27 @@ return (
                   <button className="secondary-components" onClick={() => deleteItemToAdd(index)}>Delete</button>
                 </>
               ))}
+              <button className="secondary-components" onClick={() => addItemsToOrder(itemsToAdd)}>Update Order</button>
             </div>
           </div>
         )}
       </div>
     ))}
+<Modal 
+  isOpen={isModalOpen} 
+  onRequestClose={() => setIsModalOpen(false)}
+  className="ReactModal__Content"
+  overlayClassName="ReactModal__Overlay"
+  shouldCloseOnOverlayClick={false}
+>
+  <h2 className="modal-title">Order updated successfully!</h2>
+  <button 
+    onClick={() => { setIsModalOpen(false); window.location.reload(); }}
+    className="modal-button"
+  >
+    OK
+  </button>
+</Modal>
   </div>
 );
 }

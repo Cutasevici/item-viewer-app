@@ -2,7 +2,7 @@ import React from 'react';
 
 function ClearButton2({ clearOrders }) {
   return (
-    <button className ="container-dynamic-button" onClick={clearOrders}>
+    <button className ="secondary-components" onClick={clearOrders}>
       Clear
     </button>
   );

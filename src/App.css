@@ -345,6 +345,141 @@ button:hover {
   justify-content: center;
 }
 
+/* Modal window styling */
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4); /* Add a semi-transparent background */
+}
+
+.ReactModal__Content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  border: none; /* Remove the border */
+  background: #fff;
+  overflow: auto;
+  WebkitOverflowScrolling: touch;
+  borderRadius: 4px;
+  outline: none;
+  padding: 20px;
+  width: 80vw; /* adjust this to change the width */
+  height: 80vh; /* adjust this to change the height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12); /* Material Design shadow */
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.modal-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  color: white;
+  cursor: pointer;
+  background-color: #00897b; /* Cold dark green */
+  transition: background-color 0.3s;
+}
+
+.modal-button:hover {
+  background-color: #00796b; /* Darken the background color on hover */
+}
+
+.modal-button:active {
+  background-color: #00695c; /* Darken the background color even more when the button is clicked */
+}
+
+.modal-button.cancel {
+  background-color: #c62828; /* Cold red */
+}
+
+.modal-button.cancel:hover {
+  background-color: #b71c1c; /* Darken the background color on hover */
+}
+
+.modal-button.cancel:active {
+  background-color: #d32f2f; /* Darken the background color even more when the button is clicked */
+}
+
+.modal-items {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.modal-items p {
+  margin: 0;
+  padding: 5px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+}
+
+.total-price {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+/* modal window styling finish */
+
+/* App text start */
+
+.app-text {
+  font-family: 'Arial', sans-serif; /* Uses Arial, but you can choose any web-safe font */
+  font-size: 14px; /* Standard readable size, adjust as necessary */
+  line-height: 1.6; /* Ensures proper spacing between lines of text */
+  color: #333; /* Dark gray for high contrast and readability */
+  text-align: left; /* Default alignment to left, can be overridden as needed */
+}
+
+/* Specific styles for button text */
+.app-text-button {
+  font-size: 16px; /* Slightly larger font for button text */
+  font-weight: bold; /* Bold text for emphasis */
+  color: #ffffff; /* White text color for contrast on buttons */
+  text-align: center; /* Center text inside buttons */
+  padding: 8px 12px; /* Adequate padding for clickable area */
+  background-color: #0066cc; /* Pleasant blue background */
+  border-radius: 4px; /* Rounded corners for a modern look */
+  border: none; /* No border for a cleaner appearance */
+  cursor: pointer; /* Cursor changes to indicate clickable buttons */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* app text finish */
+
+/* close order modal window start */
+
+
+
+/* close order modal window finish */
+
 /* Mobile first styles */
 nav ul {
   list-style-type: none;
