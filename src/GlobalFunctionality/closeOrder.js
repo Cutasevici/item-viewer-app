@@ -56,8 +56,8 @@ const CloseOrder = ({ orderId }) => {
     
 
     return (
-        <div>
-          <button className="secondary-components" style={{ width: '100vw' }} onClick={handleOpenModal}>Close Order</button>
+        <>   
+          <button className="item-button close-order" onClick={handleOpenModal}>Close Order</button>  
           <Modal 
             isOpen={isCloseOrderModalOpen} 
             onRequestClose={() => setCloseOrderModalOpen(false)}
@@ -74,7 +74,7 @@ const CloseOrder = ({ orderId }) => {
                 <button className="modal-button" onClick={handlePay}>Pay</button>
                 <button className="modal-button cancel" onClick={() => setCloseOrderModalOpen(false)}>Cancel</button>
                 </div>
-        </Modal>
+         </Modal>
           <Modal 
             isOpen={isSuccessModalOpen} 
             onRequestClose={() => setIsSuccessModalOpen(false)}
@@ -90,7 +90,7 @@ const CloseOrder = ({ orderId }) => {
                 OK
             </button>
             </Modal>
-        </div>
+        </>
       );
 };
 

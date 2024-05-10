@@ -386,18 +386,14 @@ button:hover {
   width: 100%;
 }
 .modal-button {
-  padding: 10px 20px;
-  margin: 10px;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-weight: 500;
-  line-height: 1.75;
-  border-radius: 4px;
-  letter-spacing: 0.02857em;
-  text-transform: uppercase;
   color: white;
-  cursor: pointer;
-  background-color: #00897b; /* Cold dark green */
-  transition: background-color 0.3s;
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  font-size: 20px; /* Increase the font size */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px; /* Add padding to increase the size of the button */
 }
 
 .modal-button:hover {
@@ -507,6 +503,33 @@ nav ul li {
     text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
   }
 }
+
+.item-button.clear {
+  background-color: #8f6e7b
+  ; /* Replace #yourColor with the color you want */
+}
+
+.item-button.clear:hover {
+  background-color: red; /* Slightly brownish color on hover */
+}
+
+.item-button.close-order {
+  background-color: darkgreen; /* Dark green by default */
+  width: 100%; /* Full width */
+}
+
+.item-button.close-order:hover {
+  background-color: green; /* Lighter green on hover */
+}
+
+.item-button.update {
+  background-color: #8AADB4; /* Dark green by default */
+}
+
+.item-button.update:hover {
+  background-color: #52676C; /* Lighter green on hover */
+}
+
 
 /* Tablet and above */
 @media (min-width: 768px) {

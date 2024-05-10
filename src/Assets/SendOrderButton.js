@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
 import updateOrder from '../GlobalFunctionality/modifyOrder';
 
-function SendOrderButton({ createOrder, order, editingOrderId, clearEditingOrderId, clearOrder }) {
+function SendOrderButton({ order, editingOrderId, clearEditingOrderId, }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  
   const sendOrder = async () => {
     if (order.length === 0) {
       console.error('Cannot send an empty order!');
@@ -25,17 +29,38 @@ function SendOrderButton({ createOrder, order, editingOrderId, clearEditingOrder
       if (!response.ok) {
         throw new Error('HTTP error ' + response.status);
       }
-
-      // Refresh the page after sending the order
-      window.location.reload();
+      setModalMessage('Order sent successfully');
+      setIsModalOpen(true);
     } catch (error) {
       console.error('There was an error!', error);
+      setModalMessage('There was an error!');
+      setIsModalOpen(true);
     }
+  };
+
+  const closeModalAndRefresh = () => {
+    setIsModalOpen(false);
+    window.location.reload();
   };
 
   return (
     <>
-       <button onClick={sendOrder}>Send Order</button>
+      <button onClick={sendOrder}>Send Order</button>
+      <Modal 
+        isOpen={isModalOpen} 
+        onRequestClose={closeModalAndRefresh}
+        className="ReactModal__Content"
+        overlayClassName="ReactModal__Overlay"
+        shouldCloseOnOverlayClick={false}
+      >
+        <h2 className="modal-title">{modalMessage}</h2>
+        <button 
+          onClick={closeModalAndRefresh}
+          className="modal-button"
+        >
+          OK
+        </button>
+      </Modal>
     </>
   );
 }

@@ -5,6 +5,7 @@ import updateOrder from './GlobalFunctionality/modifyOrder';
 import ItemSelector from './GlobalFunctionality/ItemSelector';
 import OrderList from './GlobalFunctionality/OrderList';
 import GetOrderHistory from './GlobalFunctionality/getOrderHistory';
+import ServerCheck from './GlobalFunctionality/ServerCheck';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,11 +15,9 @@ function App() {
   const [order, setOrder] = useState([]);
   const [editingOrderId, setEditingOrderId] = useState(null);
   const [itemsToAdd, setItemsToAdd] = useState([]);
-  const [setFetchedOrders] = React.useState({});
-const [setSelectedOrderId] = React.useState(null);
-const [showNewOrder, setShowNewOrder] = useState(false);
-const [showOrderHistory, setShowOrderHistory] = useState(false);
-const [showExistingOrders, setShowExistingOrders] = useState(false);
+  const [showNewOrder, setShowNewOrder] = useState(false);
+  const [showOrderHistory, setShowOrderHistory] = useState(false);
+  const [showExistingOrders, setShowExistingOrders] = useState(false);
 
 
 
@@ -58,44 +57,55 @@ const [showExistingOrders, setShowExistingOrders] = useState(false);
       });
   };
 
-  const clearOrders = () => {
-    setFetchedOrders({}); // Reset fetchedOrders
-    setSelectedOrderId(null); // Reset selectedOrderId
-  };
 
   function deleteItem(index) {
     setOrder(prevOrder => prevOrder.filter((item, i) => i !== index));
   }
 
+  
+
   return (
-    <div className="App">
+    
       <div className="global-container">
-        <button className="global-button existing-orders-button" onClick={() => setShowExistingOrders(!showExistingOrders)}>
+        <ServerCheck />
+        <button className="global-button existing-orders-button" onClick={() => {
+          setShowExistingOrders(!showExistingOrders);
+          setShowOrderHistory(false);
+          setShowNewOrder(false);
+        }}>
           Existing Orders
         </button>
         {showExistingOrders && (
           <>
             <OrderList editOrder={editOrder}/>
-            <ClearButton clearOrders={clearOrders} />
+
           </>
         )}
   
-        <button className="global-button order-history-button" onClick={() => setShowOrderHistory(!showOrderHistory)}>
+          <button className="global-button order-history-button" onClick={() => {
+          setShowOrderHistory(!showOrderHistory);
+          setShowExistingOrders(false);
+          setShowNewOrder(false);
+        }}>
           Order History
         </button>
         {showOrderHistory && (
           <GetOrderHistory />
         )}
   
-        <button className="global-button new-order-button" onClick={() => setShowNewOrder(!showNewOrder)}>
-          New Order
-        </button>
+            <button className="global-button new-order-button" onClick={() => {
+            setShowNewOrder(!showNewOrder);
+            setShowExistingOrders(false);
+            setShowOrderHistory(false);
+          }}>
+            New Order
+          </button>
         {showNewOrder && (
           <div>
             <ItemSelector addToOrder={addToOrder} />
             <div className="secondary-components">
               <SendOrderButton createOrder={createOrder} order={order} editingOrderId={editingOrderId} clearEditingOrderId={clearEditingOrderId} />
-              <ClearButton clearOrder={clearOrder} />
+              <ClearButton  clearOrder={clearOrder} />
             </div>
             <div className="items-container">
               {order.map((item, index) => (
@@ -103,7 +113,7 @@ const [showExistingOrders, setShowExistingOrders] = useState(false);
                   <div style={{ flex: 4 }}> {item.itemName}</div>  {/* item name */}
                   <div style={{ flex: 4 }}> {item.itemPrice}</div> {/* item price */}
                   <div style={{ flex: 1 }}>
-                    <button className ="secondary-components" onClick={() => deleteItem(index)}>Delete</button> {/* delete button */}
+                    <button className ="item-button clear" onClick={() => deleteItem(index)}>Delete</button> {/* delete button */}
                   </div>
                 </div>
               ))}
@@ -111,7 +121,7 @@ const [showExistingOrders, setShowExistingOrders] = useState(false);
           </div>
         )}
       </div>
-    </div>
+
   );
 }
 

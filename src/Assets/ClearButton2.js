@@ -2,7 +2,7 @@ import React from 'react';
 
 function ClearButton2({ clearOrders }) {
   return (
-    <button className ="secondary-components" onClick={clearOrders}>
+    <button className ="item-button clear" onClick={clearOrders}>
       Clear
     </button>
   );

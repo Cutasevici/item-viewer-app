@@ -4,6 +4,7 @@ import CloseOrder from './closeOrder';
 import Modal from 'react-modal';
 
 
+
 function OrderList({editOrder}) {
     const [orders, setOrders] = useState([]);
     const [fetchedOrders, setFetchedOrders] = useState({});
@@ -11,6 +12,8 @@ function OrderList({editOrder}) {
     const [itemsToAdd, setItemsToAdd] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
   
     
   
@@ -74,20 +77,28 @@ const addItemsToOrder = async (items) => {
     setSuccessMessage('No items to add.');
     return;
   }
-  const response = await fetch(`http://localhost:8080/api/orders/edit/${selectedOrderId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      status: 'add',
-      items: items.map(item => ({
-        itemId: item.itemId,
-        itemName: item.itemName,
-        itemPrice: item.itemPrice
-      })),
-    }),
-  });
+  let response;
+  try {
+    response = await fetch(`http://localhost:8080/api/orders/edit/${selectedOrderId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        status: 'add',
+        items: items.map(item => ({
+          itemId: item.itemId,
+          itemName: item.itemName,
+          itemPrice: item.itemPrice
+        })),
+      }),
+    });
+  } catch (error) {
+    console.error('Server is not working', error);
+    setErrorMessage('Server is not working');
+    setIsErrorModalOpen(true);
+    return;
+  }
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -108,6 +119,16 @@ const deleteItemToAdd = (index) => {
   newItemsToAdd.splice(index, 1);
   setItemsToAdd(newItemsToAdd);
 };
+
+function ClearButton() {
+  const clearPage = () => {
+    window.location.reload();
+  };
+
+  return (
+    <button className="item-button clear" onClick={clearPage}>Clear</button>
+  );
+}
   
 return (
   <div className="order-container">
@@ -153,10 +174,11 @@ return (
                   <div key={item.itemId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <p style={{ flex: 4 }}>{item.itemName} - ${item.itemPrice}</p>
                   </div>
-                  <button className="secondary-components" onClick={() => deleteItemToAdd(index)}>Delete</button>
+                  <button className="item-button clear" onClick={() => deleteItemToAdd(index)}>Delete</button>
                 </>
               ))}
-              <button className="secondary-components" onClick={() => addItemsToOrder(itemsToAdd)}>Update Order</button>
+              <button className="item-button update" onClick={() => addItemsToOrder(itemsToAdd)}>Update Order</button>
+                <ClearButton />
             </div>
           </div>
         )}
@@ -172,6 +194,21 @@ return (
   <h2 className="modal-title">Order updated successfully!</h2>
   <button 
     onClick={() => { setIsModalOpen(false); window.location.reload(); }}
+    className="modal-button"
+  >
+    OK
+  </button>
+</Modal>
+<Modal 
+  isOpen={isErrorModalOpen} 
+  onRequestClose={() => setIsErrorModalOpen(false)}
+  className="ReactModal__Content"
+  overlayClassName="ReactModal__Overlay"
+  shouldCloseOnOverlayClick={false}
+>
+  <h2 className="modal-title">{errorMessage}</h2>
+  <button 
+    onClick={() => { setIsErrorModalOpen(false); }}
     className="modal-button"
   >
     OK

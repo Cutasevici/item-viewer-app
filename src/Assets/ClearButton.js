@@ -6,7 +6,7 @@ function ClearButton() {
   };
 
   return (
-    <button className ="secondary-components" onClick={clearPage}>Clear</button>
+    <button className ="item-button clear" onClick={clearPage}>Clear</button>
   );
 }
 
