@@ -109,29 +109,74 @@ button {
 
 /* Existing orders button */
 .existing-orders-button {
-  background-color: #AC3B61;
-  border: none;
+  margin: 2%;
+  border-radius: 50px;
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  font-size: 36px;
+  font-weight: 600;
+  width: flex;
+  height: 120px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../src/GlobalFunctionality/img/pending.jpeg");
+  background-size: cover;
+  background-position: center;
 }
 
 .existing-orders-button:hover {
-  background-color: #66a3ff;
+  font-size: 42px;
+  transition: font-size 0.1s;
+  background-size: 110%;
 }
 
 /* New order button */
 .new-order-button {
-  background-color: #669999; /* Green */
-  border: none;
+  margin: 2%;
+  border-radius: 50px;
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  font-size: 36px;
+  font-weight: 600;
+  width: flex;
+  height: 120px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../src/GlobalFunctionality/img/neworder.jpeg");
+  background-size: cover;
+  background-position: center;
 }
 
 .new-order-button:hover {
-  background-color: #006666;
+  font-size: 42px;
+  transition: font-size 0.1s;
+  background-size: 110%;
 }
 
 /* Order History Button */
 .order-history-button {
-  background-color: #123C69; /* Bootstrap's warning color */
-  border: none;
+  margin: 2%;
+  border-radius: 50px;
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  font-size: 36px;
+  font-weight: 600;
+  width: flex;
+  height: 120px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../src/GlobalFunctionality/img/orderhistory.jpeg");
+  background-size: cover;
+  background-position: center;
 }
+
+.order-history-button:hover {
+  font-size: 42px;
+  transition: font-size 0.1s;
+  background-size: 110%;
+}
+
+.closed-orders {
+  margin: 5px;
+}
+
 
 .order-history-button:hover {
   background-color: #EDC7B7; /* Darker shade for hover */
@@ -217,24 +262,41 @@ button:hover {
 }
 
 .item-button {
-  background-color: #008CBA;
+  background-color: #124e66;
   color: white;
   border: none;
   border-radius: 4px; /* Rounded corners */
-  font-size: 20px; /* Increase the font size */
+  padding: 10px 20px; /* Add some padding */
   text-align: center;
   text-decoration: none;
+  font-weight: bold;
   display: inline-block;
-  
+  font-size: 14px;
+  cursor: pointer;
   transition-duration: 0.4s;
   /* width: 90px; Remove the fixed width */
   height: 50px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Add a shadow */
-  margin: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a shadow */
+  white-space: nowrap; /* Prevent the text from wrapping onto multiple lines */
+  overflow: hidden; /* Hide any text that overflows the button */
+  text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
+  margin: 5px;
 }
 
 .item-button:hover {
-  background-color: #007BFF; /* Darken the button when hovered */
+  background-color: #124e66;
+  font-weight: bold;
+  transition: color 0.5s, background-color 0.2s, font-weight 0.5s,
+    box-shadow 0.5s;
+  background-image: linear-gradient(
+    to right,
+    #208ab4,
+    #1d7da3,
+    #1a7092,
+    #186a8a,
+    #155d79,
+    #124e66
+  );
 }
 
 .item-button:active {
@@ -252,7 +314,7 @@ button:hover {
 
 
 .get-order-button {
-  background-color: #008CBA;
+  background-color: #124e66;
   color: white;
   border: none;
   border-radius: 4px; /* Rounded corners */
@@ -261,15 +323,17 @@ button:hover {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   transition-duration: 0.4s;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Add a shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a shadow */
   white-space: nowrap; /* Prevent the text from wrapping onto multiple lines */
   overflow: hidden; /* Hide any text that overflows the button */
   text-overflow: ellipsis; /* Add an ellipsis (...) when the text overflows */
   width: 100%;
-  margin-bottom: 2px;
+  margin: 5px;
 }
+
 
 .get-order-button:hover {
   background-color: #007BFF; /* Darken the button when hovered */
@@ -280,10 +344,7 @@ button:hover {
   box-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Make the shadow smaller when clicked */
 }
 
-.get-order-button.selected {
-  background-color: #4CAF50;
-  color: white;
-}
+
 
 /* Diplay field for Items to add in OrderList.js */
 
