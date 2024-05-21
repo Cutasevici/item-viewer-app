@@ -62,6 +62,7 @@ function App() {
     setOrder(prevOrder => prevOrder.filter((item, i) => i !== index));
   }
 
+
   
 
   return (
@@ -114,7 +115,9 @@ function App() {
                   <div style={{ flex: 4 }}> {item.itemPrice}</div> {/* item price */}
                   <div style={{ flex: 1 }}>
                     <button className ="item-button clear" onClick={() => deleteItem(index)}>Delete</button> {/* delete button */}
+                 
                   </div>
+                
                 </div>
               ))}
             </div>

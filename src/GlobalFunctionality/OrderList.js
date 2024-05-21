@@ -14,6 +14,8 @@ function OrderList({editOrder}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [itemCommentaries, setItemCommentaries] = useState({});
+    const [showCommentFields, setShowCommentFields] = useState({});
   
     
   
@@ -86,10 +88,11 @@ const addItemsToOrder = async (items) => {
       },
       body: JSON.stringify({
         status: 'add',
-        items: items.map(item => ({
+        items: items.map((item, index) => ({
           itemId: item.itemId,
           itemName: item.itemName,
-          itemPrice: item.itemPrice
+          itemPrice: item.itemPrice,
+          itemCommentary: itemCommentaries[index] || null, // Use the index here
         })),
       }),
     });
@@ -128,6 +131,14 @@ function ClearButton() {
   return (
     <button className="item-button clear" onClick={clearPage}>Clear</button>
   );
+}
+
+const handleCommentaryChange = (index, commentary) => {
+  setItemCommentaries(prev => ({ ...prev, [index]: commentary }));
+}
+
+const handleAddCommentButtonClick = (index) => {
+  setShowCommentFields(prev => ({ ...prev, [index]: !prev[index] }));
 }
   
 return (
@@ -170,53 +181,69 @@ return (
             <div className="items-to-add">
               <h4>Items to Add:</h4>
               {itemsToAdd.map((item, index) => (
-                <>
-                  <div key={item.itemId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <p style={{ flex: 4 }}>{item.itemName} - ${item.itemPrice}</p>
-                  </div>
+              <div key={index} style={{ marginBottom: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <p style={{ flex: 4 }}>{item.itemName} - ${item.itemPrice}</p>
+                </div>
+                <div>
                   <button className="item-button clear" onClick={() => deleteItemToAdd(index)}>Delete</button>
-                </>
-              ))}
-              <button className="item-button update" onClick={() => addItemsToOrder(itemsToAdd)}>Update Order</button>
-                <ClearButton />
-            </div>
+                  <button className="item-button add-comment" onClick={() => handleAddCommentButtonClick(index)}>
+                    {showCommentFields[index] ? 'Hide Comment' : 'Add Comment'}
+                  </button>
+                </div>
+                {showCommentFields[index] && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <input 
+                      type="text" 
+                      style={{ flex: 4 }}
+                      placeholder="Add commentary"
+                      value={itemCommentaries[index] || ''} 
+                      onChange={e => handleCommentaryChange(index, e.target.value)} 
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+            <button className="item-button update" onClick={() => addItemsToOrder(itemsToAdd, itemCommentaries)}>Update Order</button>
+            <ClearButton />
           </div>
+        </div>
         )}
       </div>
     ))}
-<Modal 
-  isOpen={isModalOpen} 
-  onRequestClose={() => setIsModalOpen(false)}
-  className="ReactModal__Content"
-  overlayClassName="ReactModal__Overlay"
-  shouldCloseOnOverlayClick={false}
->
-  <h2 className="modal-title">Order updated successfully!</h2>
-  <button 
-    onClick={() => { setIsModalOpen(false); window.location.reload(); }}
-    className="modal-button"
-  >
-    OK
-  </button>
-</Modal>
-<Modal 
-  isOpen={isErrorModalOpen} 
-  onRequestClose={() => setIsErrorModalOpen(false)}
-  className="ReactModal__Content"
-  overlayClassName="ReactModal__Overlay"
-  shouldCloseOnOverlayClick={false}
->
-  <h2 className="modal-title">{errorMessage}</h2>
-  <button 
-    onClick={() => { setIsErrorModalOpen(false); }}
-    className="modal-button"
-  >
-    OK
-  </button>
-</Modal>
-  </div>
-);
-}
+          <Modal 
+            isOpen={isModalOpen} 
+            onRequestClose={() => setIsModalOpen(false)}
+            className="ReactModal__Content"
+            overlayClassName="ReactModal__Overlay"
+            shouldCloseOnOverlayClick={false}
+          >
+            <h2 className="modal-title">Order updated successfully!</h2>
+            <button 
+              onClick={() => { setIsModalOpen(false); window.location.reload(); }}
+              className="modal-button"
+            >
+              OK
+            </button>
+          </Modal>
+          <Modal 
+            isOpen={isErrorModalOpen} 
+            onRequestClose={() => setIsErrorModalOpen(false)}
+            className="ReactModal__Content"
+            overlayClassName="ReactModal__Overlay"
+            shouldCloseOnOverlayClick={false}
+          >
+            <h2 className="modal-title">{errorMessage}</h2>
+            <button 
+              onClick={() => { setIsErrorModalOpen(false); }}
+              className="modal-button"
+            >
+              OK
+            </button>
+          </Modal>
+            </div>
+          );
+        }
 
 
 export default OrderList;
