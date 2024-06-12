@@ -151,6 +151,27 @@ button {
   background-size: 110%;
 }
 
+.kitchen-button {
+  margin: 2%;
+  border-radius: 50px;
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  font-size: 36px;
+  font-weight: 600;
+  width: flex;
+  height: 120px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../src/GlobalFunctionality/img/kitchen.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.kitchen-button:hover {
+  font-size: 42px;
+  transition: font-size 0.1s;
+  background-size: 110%;
+}
+
 /* Order History Button */
 .order-history-button {
   margin: 2%;
